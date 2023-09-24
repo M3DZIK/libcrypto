@@ -58,9 +58,9 @@ public class Aes {
      * @param type AES type to use
      * @param key secret key to use for decryption
      * @param cipherText cipher text to decrypt (hex encoded)
-     * @return Clear text as string. (UTF-8)
+     * @return Decrypted bytes
      */
-    public static String decrypt(AesType type, byte[] key, String cipherText) throws DecoderException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    public static byte[] decrypt(AesType type, byte[] key, String cipherText) throws DecoderException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         // get IV length in hex string
         int ivLength = type.getIvLength() * 2;
 
@@ -84,10 +84,7 @@ public class Aes {
         }
 
         // decrypt
-        byte[] clearBytes = cipher.doFinal(cipherBytes);
-
-        // return clear text as string
-        return new String(clearBytes);
+        return cipher.doFinal(cipherBytes);
     }
 
     private static AlgorithmParameterSpec getParameterSpec(AesType type, byte[] iv) {
