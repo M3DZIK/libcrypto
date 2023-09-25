@@ -10,7 +10,7 @@ import java.security.InvalidKeyException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AesTests {
+public final class AesTests {
     @Test
     public void testCBCEncryptAndDecrypt() throws DecoderException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
         byte[] secretKey = Hex.decodeHex("82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b");

@@ -15,7 +15,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.AlgorithmParameterSpec;
 
-public class Aes {
+public final class Aes {
     private static final String ALGORITHM = "AES";
 
     public static final AesType GCM = AesType.GCM;

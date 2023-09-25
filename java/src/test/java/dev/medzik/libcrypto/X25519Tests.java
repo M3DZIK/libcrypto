@@ -8,7 +8,7 @@ import java.security.InvalidKeyException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class X25519Tests {
+public final class X25519Tests {
     @Test
     public void testComputeSharedSecret() throws DecoderException, InvalidKeyException {
         byte[] privateKey = Hex.decodeHex("3845bead1f44408ee436c742291f1362489eeaaa9daebd480b1c3e4bc528cb48");

@@ -8,10 +8,7 @@ import dev.medzik.libcrypto.internal.Field25519;
 import java.security.InvalidKeyException;
 import java.util.Arrays;
 
-/**
- *
- */
-public class X25519 {
+public final class X25519 {
     /**
      * Generates a 32-byte private key for Curve25519.
      * @return a 32-byte private key

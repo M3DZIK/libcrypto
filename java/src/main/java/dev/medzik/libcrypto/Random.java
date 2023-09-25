@@ -2,7 +2,7 @@ package dev.medzik.libcrypto;
 
 import java.security.SecureRandom;
 
-public class Random {
+public final class Random {
     /**
      * Generate a random byte array.
      * @param size length of salt slice in bytes
