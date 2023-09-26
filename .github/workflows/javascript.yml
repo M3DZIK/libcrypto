@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install dependencies
+        run: npm install --prefix javascript
+
       - name: Compile TypeScript to JavaScript
         run: npm run compile --prefix javascript
 
