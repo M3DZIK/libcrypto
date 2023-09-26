@@ -26,6 +26,7 @@ public final class Aes {
      * @param type AES type to use
      * @param key secret key to use for encryption
      * @param clearBytes clear bytes to encrypt (UTF-8)
+     * @return Encrypted cipher (hex encoded)
      */
     public static String encrypt(AesType type, byte[] key, byte[] clearBytes) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         // generate random IV
