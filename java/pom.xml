@@ -4,11 +4,31 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>Cryptography utilities</name>
     <groupId>dev.medzik</groupId>
     <artifactId>libcrypto</artifactId>
     <version>1.0.0</version>
     <description>Cryptographic utilities</description>
     <url>https://github.com/M3DZIK/libcrypto</url>
+
+    <developers>
+        <developer>
+            <name>M3DZIK</name>
+            <email>me@medzik.dev</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/M3DZIK/libcrypto-java</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://github.com/M3DZIK/libcrypto/blob/main/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <properties>
         <maven.compiler.source>9</maven.compiler.source>
