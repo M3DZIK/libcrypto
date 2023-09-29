@@ -1,8 +1,5 @@
 package dev.medzik.libcrypto;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -51,7 +48,7 @@ public final class Aes {
         byte[] cipherBytes = cipher.doFinal(clearBytes);
 
         // return IV + cipher text as hex string
-        return Hex.encodeHexString(iv) + Hex.encodeHexString(cipherBytes);
+        return Hex.encode(iv) + Hex.encode(cipherBytes);
     }
 
     /**
@@ -61,13 +58,13 @@ public final class Aes {
      * @param cipherText cipher text to decrypt (hex encoded)
      * @return Decrypted bytes
      */
-    public static byte[] decrypt(AesType type, byte[] key, String cipherText) throws DecoderException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    public static byte[] decrypt(AesType type, byte[] key, String cipherText) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         // get IV length in hex string
         int ivLength = type.getIvLength() * 2;
 
         // extract IV and Cipher Text from hex string
-        byte[] iv = Hex.decodeHex(cipherText.substring(0, ivLength));
-        byte[] cipherBytes = Hex.decodeHex(cipherText.substring(ivLength));
+        byte[] iv = Hex.decode(cipherText.substring(0, ivLength));
+        byte[] cipherBytes = Hex.decode(cipherText.substring(ivLength));
 
         SecretKeySpec secretKey = new SecretKeySpec(key, ALGORITHM);
         AlgorithmParameterSpec parameterSpec = getParameterSpec(type, iv);

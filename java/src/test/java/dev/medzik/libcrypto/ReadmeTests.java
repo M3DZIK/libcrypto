@@ -1,7 +1,5 @@
 package dev.medzik.libcrypto;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
 import org.junit.jupiter.api.Test;
 
 import javax.crypto.BadPaddingException;
@@ -11,18 +9,18 @@ import java.security.InvalidKeyException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ReadmeTests {
+public final class ReadmeTests {
     @Test
-    public void testAesGcmEncryptDecryption() throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, DecoderException {
+    public void testAesGcmEncryptDecryption() throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
         String clearText = "hello world";
         // Key used for encryption (for example, argon2 hash in hex string)
         String secretKey = "82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b";
 
         // Encrypt using AES-GCM (AES-CBC is also available)
-        String cipherText = Aes.encrypt(Aes.GCM, Hex.decodeHex(secretKey), clearText.getBytes());
+        String cipherText = Aes.encrypt(Aes.GCM, Hex.decode(secretKey), clearText.getBytes());
 
         // Decrypt cipher text
-        byte[] decryptedBytes = Aes.decrypt(Aes.GCM, Hex.decodeHex(secretKey), cipherText);
+        byte[] decryptedBytes = Aes.decrypt(Aes.GCM, Hex.decode(secretKey), cipherText);
 
         assertEquals(clearText, new String(decryptedBytes));
     }
@@ -43,13 +41,13 @@ public class ReadmeTests {
         Argon2Hash hash = argon2.hash("secret password", Random.randBytes(16));
 
         // Secret Key used for AES encryption
-        String secretKey = Hex.encodeHexString(hash.getHash());
+        String secretKey = Hex.encode(hash.getHash());
 
         assertTrue(Argon2.verify("secret password", hash.toString()));
     }
 
     @Test
-    public void testX25519ExchangeKeys() throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, DecoderException {
+    public void testX25519ExchangeKeys() throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         // Generate private key for Bob
         byte[] bobPrivateKey = X25519.generatePrivateKey();
         byte[] bobPublicKey = X25519.publicFromPrivate(bobPrivateKey);

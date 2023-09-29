@@ -1,7 +1,5 @@
 package dev.medzik.libcrypto;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
 import org.junit.jupiter.api.Test;
 
 import javax.crypto.BadPaddingException;
@@ -12,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public final class AesTests {
     @Test
-    public void testCBCEncryptAndDecrypt() throws DecoderException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-        byte[] secretKey = Hex.decodeHex("82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b");
+    public void testCBCEncryptAndDecrypt() throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+        byte[] secretKey = Hex.decode("82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b");
 
         String input = "Hello World!";
         String cipherText =  Aes.encrypt(Aes.CBC, secretKey, input.getBytes());
@@ -23,8 +21,8 @@ public final class AesTests {
     }
 
     @Test
-    public void testCBCDecrypt() throws DecoderException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-        byte[] secretKey = Hex.decodeHex("82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b");
+    public void testCBCDecrypt() throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+        byte[] secretKey = Hex.decode("82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b");
 
         String cipherText = "ae77d812f4494a766a94b5dff8e7aa3c8408544b9fd30cd13b886cc5dd1b190e";
         byte[] clearBytes = Aes.decrypt(Aes.CBC, secretKey, cipherText);
@@ -33,8 +31,8 @@ public final class AesTests {
     }
 
     @Test
-    public void testGCMEncryptAndDecrypt() throws DecoderException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-        byte[] secretKey = Hex.decodeHex("82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b");
+    public void testGCMEncryptAndDecrypt() throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+        byte[] secretKey = Hex.decode("82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b");
 
         String input = "Hello World!";
         String cipherText =  Aes.encrypt(Aes.GCM, secretKey, input.getBytes());
@@ -44,8 +42,8 @@ public final class AesTests {
     }
 
     @Test
-    void testGCMDecrypt() throws DecoderException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-        byte[] secretKey = Hex.decodeHex("82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b");
+    void testGCMDecrypt() throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+        byte[] secretKey = Hex.decode("82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b");
 
         String cipherText = "0996c65a72a60e748415dc6d32da1d4dcb65f41c71d4bec9554424218839b5d4b9d9195e5eea9d";
         byte[] clearBytes = Aes.decrypt(Aes.GCM, secretKey, cipherText);

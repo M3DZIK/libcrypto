@@ -18,7 +18,7 @@
 
 package dev.medzik.libcrypto.internal;
 
-import org.apache.commons.codec.binary.Hex;
+import dev.medzik.libcrypto.Hex;
 
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
@@ -320,7 +320,7 @@ public final class Curve25519 {
         // q, resultx, nqpqx/nqpqx  are x coordinates of 3 collinear points q, n*q, (n + 1)*q.
         if (!isCollinear(q, resultx, nqpqx, nqpqz)) {
             throw new IllegalStateException(
-                    "Arithmetic error in curve multiplication with the public key: " + Hex.encodeHexString(qBytes));
+                    "Arithmetic error in curve multiplication with the public key: " + Hex.encode(qBytes));
         }
     }
 
@@ -340,7 +340,7 @@ public final class Curve25519 {
 
         for (int i = 0; i < BANNED_PUBLIC_KEYS.length; i++) {
             if (MessageDigest.isEqual(BANNED_PUBLIC_KEYS[i], pubKeyWithoutMsb)) {
-                throw new InvalidKeyException("Banned public key: " + Hex.encodeHexString(BANNED_PUBLIC_KEYS[i]));
+                throw new InvalidKeyException("Banned public key: " + Hex.encode(BANNED_PUBLIC_KEYS[i]));
             }
         }
         return pubKeyWithoutMsb;
