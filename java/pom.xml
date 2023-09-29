@@ -7,7 +7,7 @@
     <name>Cryptography utilities</name>
     <groupId>dev.medzik</groupId>
     <artifactId>libcrypto</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <description>Cryptographic utilities</description>
     <url>https://github.com/M3DZIK/libcrypto</url>
 
