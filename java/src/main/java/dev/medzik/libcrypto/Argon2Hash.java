@@ -1,8 +1,6 @@
 package dev.medzik.libcrypto;
 
-/**
- * Object representation of argon2 hash.
- */
+/** Object representation of argon2 hash. */
 public final class Argon2Hash {
     private final Argon2Type type;
     private final int version;

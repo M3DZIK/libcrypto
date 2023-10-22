@@ -11,6 +11,7 @@ public final class Argon2EncodingUtils {
 
     /**
      * Encodes the given hash and parameters to a string.
+     *
      * @param hash hash to encode
      * @return encoded hash in argon2 format
      */
@@ -42,6 +43,7 @@ public final class Argon2EncodingUtils {
 
     /**
      * Decodes the given Argon2 encoded hash.
+     *
      * @param encodedHash encoded hash in argon2 format
      * @return {@link Argon2Hash}
      */

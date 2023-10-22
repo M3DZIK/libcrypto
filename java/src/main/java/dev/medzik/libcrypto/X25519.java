@@ -62,8 +62,7 @@ public final class X25519 {
      * @return 32-byte shared secret
      * @throws InvalidKeyException when {@code ourPrivate} is not 32-byte or {@code theirPublic} is invalid.
      */
-    public static byte[] computeSharedSecret(byte[] ourPrivate, byte[] theirPublic)
-            throws InvalidKeyException {
+    public static byte[] computeSharedSecret(byte[] ourPrivate, byte[] theirPublic) throws InvalidKeyException {
         if (ourPrivate.length != Field25519.FIELD_LEN) {
             throw new InvalidKeyException("Private key must have 32 bytes.");
         }

@@ -47,7 +47,10 @@ public final class Hex {
         return result.toString();
     }
 
-    /** Decodes a hex string to a byte array. */
+    /**
+     * Decodes a hex string to a byte array.
+     * @throws IllegalArgumentException if the input is not hexadecimal
+     */
     public static byte[] decode(String hex) {
         if (hex.length() % 2 != 0) {
             throw new IllegalArgumentException("Expected a string of even length");

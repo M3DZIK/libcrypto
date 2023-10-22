@@ -15,8 +15,8 @@ public enum Argon2Type {
                 return Argon2.I;
             case ID:
                 return Argon2.ID;
-            default:
-                throw new IllegalStateException("Unexpected value: " + this);
         }
+        // never happens
+        return null;
     }
 }

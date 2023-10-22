@@ -2,8 +2,6 @@ package dev.medzik.libcrypto;
 
 import org.junit.jupiter.api.Test;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
 import java.security.InvalidKeyException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class ReadmeTests {
     @Test
-    public void testAesGcmEncryptDecryption() throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public void testAesGcmEncryptDecryption() throws AesException {
         String clearText = "hello world";
         // Key used for encryption (for example, argon2 hash in hex string)
         String secretKey = "82fd4cefd6efde36171900b469bae4e06863cb70f80b4e216e44eeb0cf30460b";
@@ -47,7 +45,7 @@ public final class ReadmeTests {
     }
 
     @Test
-    public void testX25519ExchangeKeys() throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    public void testX25519ExchangeKeys() throws InvalidKeyException, AesException {
         // Generate private key for Bob
         byte[] bobPrivateKey = X25519.generatePrivateKey();
         byte[] bobPublicKey = X25519.publicFromPrivate(bobPrivateKey);
