@@ -2,26 +2,37 @@ package dev.medzik.libcrypto;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public final class Argon2Tests {
     @Test
     void testHash() {
-        Argon2 argon2 = new Argon2.Builder()
+        Argon2.Builder argon2Builder = new Argon2.Builder()
                 .setHashLength(32)
                 .setIterations(4)
                 .setMemory(65536)
                 .setParallelism(4)
-                .setType(Argon2Type.ID)
+                .setType(Argon2Type.ID);
+
+        Argon2Hash hashV13 = argon2Builder
                 .setVersion(Argon2.ARGON2_VERSION_13)
-                .build();
+                .build()
+                .hash("secret password", Random.randBytes(16));
 
-        Argon2Hash hash = argon2.hash("secret password", Random.randBytes(16));
-
-        assertTrue(Argon2.verify("secret password", hash.toString()));
+        assertTrue(Argon2.verify("secret password", hashV13.toString()));
         // invalid password
-        assertFalse(Argon2.verify("invalid password", hash.toString()));
+        assertFalse(Argon2.verify("invalid password", hashV13.toString()));
+
+        Argon2Hash hashV10 = argon2Builder
+                .setVersion(Argon2.ARGON2_VERSION_10)
+                .build()
+                .hash("secret password", Random.randBytes(16));
+
+        assertTrue(Argon2.verify("secret password", hashV10.toString()));
+        // invalid password
+        assertFalse(Argon2.verify("invalid password", hashV10.toString()));
+
+        assertNotEquals(hashV13, hashV10);
     }
 
     @Test

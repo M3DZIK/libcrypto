@@ -1,5 +1,7 @@
 package dev.medzik.libcrypto;
 
+import org.bouncycastle.crypto.params.Argon2Parameters;
+
 import java.util.Base64;
 
 /**
@@ -8,6 +10,19 @@ import java.util.Base64;
 public final class Argon2EncodingUtils {
     private static final Base64.Encoder b64encoder = Base64.getEncoder().withoutPadding();
     private static final Base64.Decoder b64decoder = Base64.getDecoder();
+
+    /** Encodes the given hash and parameters to a string. */
+    public static Argon2Hash encode(byte[] hash, Argon2Parameters params) {
+        return new Argon2Hash(
+                Argon2Type.values()[params.getType()],
+                params.getVersion(),
+                params.getMemory(),
+                params.getIterations(),
+                params.getLanes(),
+                params.getSalt(),
+                hash
+        );
+    }
 
     /**
      * Encodes the given hash and parameters to a string.

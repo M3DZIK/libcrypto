@@ -39,11 +39,10 @@
     </properties>
 
     <dependencies>
-        <!-- Argon2 algorithm implementation -->
         <dependency>
-            <groupId>com.password4j</groupId>
-            <artifactId>password4j</artifactId>
-            <version>1.7.3</version>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>1.76</version>
         </dependency>
 
         <!-- Tests -->

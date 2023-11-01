@@ -1,5 +1,5 @@
 module dev.medzik.libcrypto {
-    requires password4j;
+    requires org.bouncycastle.provider;
 
     exports dev.medzik.libcrypto;
 }

@@ -1,8 +1,7 @@
 package dev.medzik.libcrypto;
 
-import com.password4j.Argon2Function;
-import com.password4j.Hash;
-import com.password4j.Password;
+import org.bouncycastle.crypto.generators.Argon2BytesGenerator;
+import org.bouncycastle.crypto.params.Argon2Parameters;
 
 public final class Argon2 {
     private final int hashLength;
@@ -103,21 +102,21 @@ public final class Argon2 {
 
     /** Hashes the given password. */
     public Argon2Hash hash(String password, byte[] salt) {
-        Argon2Function instance = Argon2Function.getInstance(
-            memory,
-            iterations,
-            parallelism,
-            hashLength,
-            type.toPassword4jType(),
-            version
-        );
+        byte[] hash = new byte[this.hashLength];
 
-        Hash hash = Password
-                .hash(password)
-                .addSalt(salt)
-                .with(instance);
+        Argon2Parameters params = new Argon2Parameters.Builder(this.type.ordinal())
+                .withSalt(salt)
+                .withParallelism(this.parallelism)
+                .withMemoryAsKB(this.memory)
+                .withIterations(this.iterations)
+                .withVersion(this.version)
+                .build();
 
-        return Argon2EncodingUtils.decode(hash.getResult());
+        Argon2BytesGenerator generator = new Argon2BytesGenerator();
+        generator.init(params);
+        generator.generateBytes(password.toCharArray(), hash);
+
+        return Argon2EncodingUtils.encode(hash, params);
     }
 
     /** Verifies a password against a hash. */
@@ -125,17 +124,17 @@ public final class Argon2 {
         // decode the `encodedPassword` to get the parameters
         Argon2Hash argon2Hash = Argon2EncodingUtils.decode(encodedPassword);
 
-        Argon2Function instance = Argon2Function.getInstance(
+        Argon2 argon2 = new Argon2(
+                argon2Hash.getHashLength(),
+                argon2Hash.getParallelism(),
                 argon2Hash.getMemory(),
                 argon2Hash.getIterations(),
-                argon2Hash.getParallelism(),
-                argon2Hash.getHashLength(),
-                argon2Hash.getType().toPassword4jType(),
+                argon2Hash.getType(),
                 argon2Hash.getVersion()
         );
 
-        return Password
-                .check(rawPassword, encodedPassword)
-                .with(instance);
+        Argon2Hash hash = argon2.hash(rawPassword.toString(), argon2Hash.getSalt());
+
+        return encodedPassword.equals(hash.toString());
     }
 }
