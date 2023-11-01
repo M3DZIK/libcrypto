@@ -7,8 +7,8 @@
     <name>Cryptography utilities</name>
     <groupId>dev.medzik</groupId>
     <artifactId>libcrypto</artifactId>
-    <version>1.1.0</version>
-    <description>Cryptographic utilities</description>
+    <version>1.2.0</version>
+    <description>Cryptographic utilities — AES (CBC and GCM), Argon2 and X25519</description>
     <url>https://github.com/M3DZIK/libcrypto</url>
 
     <developers>
